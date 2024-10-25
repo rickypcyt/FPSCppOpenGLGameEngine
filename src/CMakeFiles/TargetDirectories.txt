@@ -1,0 +1,3 @@
+/home/ricky/coding/GccGame-main/src/CMakeFiles/My3DGame.dir
+/home/ricky/coding/GccGame-main/src/CMakeFiles/edit_cache.dir
+/home/ricky/coding/GccGame-main/src/CMakeFiles/rebuild_cache.dir
