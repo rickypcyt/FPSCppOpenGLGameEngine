@@ -132,12 +132,16 @@ CMakeFiles/My3DGame.dir/main.cpp.o: \
  /usr/include/c++/14.2.1/bits/locale_facets.tcc \
  /usr/include/c++/14.2.1/bits/basic_ios.tcc \
  /usr/include/c++/14.2.1/bits/ostream.tcc /usr/include/c++/14.2.1/istream \
- /usr/include/c++/14.2.1/bits/istream.tcc \
+ /usr/include/c++/14.2.1/bits/istream.tcc /usr/include/c++/14.2.1/chrono \
+ /usr/include/c++/14.2.1/bits/chrono.h /usr/include/c++/14.2.1/ratio \
+ /usr/include/c++/14.2.1/limits /usr/include/c++/14.2.1/ctime \
+ /usr/include/c++/14.2.1/bits/parse_numbers.h \
+ /usr/include/c++/14.2.1/sstream /usr/include/c++/14.2.1/bits/sstream.tcc \
+ /usr/include/c++/14.2.1/thread /usr/include/c++/14.2.1/bits/std_thread.h \
+ /usr/include/c++/14.2.1/tuple \
+ /usr/include/c++/14.2.1/bits/uses_allocator.h \
+ /usr/include/c++/14.2.1/bits/unique_ptr.h \
+ /usr/include/c++/14.2.1/bits/this_thread_sleep.h \
  /home/ricky/coding/GccGame-main/src/../include/renderer.h \
  /home/ricky/coding/GccGame-main/src/../include/movement.h \
- /home/ricky/coding/GccGame-main/src/../include/globals.h \
- /usr/include/c++/14.2.1/chrono /usr/include/c++/14.2.1/bits/chrono.h \
- /usr/include/c++/14.2.1/ratio /usr/include/c++/14.2.1/limits \
- /usr/include/c++/14.2.1/ctime \
- /usr/include/c++/14.2.1/bits/parse_numbers.h \
- /usr/include/c++/14.2.1/sstream /usr/include/c++/14.2.1/bits/sstream.tcc
+ /home/ricky/coding/GccGame-main/src/../include/globals.h
