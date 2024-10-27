@@ -6,8 +6,8 @@
 
 // Movement speed and direction variables
 float moveSpeed = 5.0f; // Changed from GLfloat to float
-float moveSpeedX = 0.0f;
-float moveSpeedY = 0.0f;
+float moveSpeedX = 0.0f; // Forward/Backward movement
+float moveSpeedY = 0.0f; // Left/Right movement
 
 // Jump variables
 bool isJumping = false; 
@@ -18,13 +18,13 @@ float verticalVelocity = 0.0f;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         if (key == GLFW_KEY_W) {
-            moveSpeedY = -moveSpeed; // Move forward
+            moveSpeedX = moveSpeed; // Move forward
         } else if (key == GLFW_KEY_S) {
-            moveSpeedY = moveSpeed; // Move backward
+            moveSpeedX = -moveSpeed; // Move backward
         } else if (key == GLFW_KEY_A) {
-            moveSpeedX = -moveSpeed; // Strafe left
+            moveSpeedY = -moveSpeed; // Strafe left
         } else if (key == GLFW_KEY_D) {
-            moveSpeedX = moveSpeed; // Strafe right
+            moveSpeedY = moveSpeed; // Strafe right
         } else if (key == GLFW_KEY_SPACE && !isJumping) {
             std::cout << "Jump initiated!" << std::endl;
             isJumping = true;
@@ -36,18 +36,21 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
     if (action == GLFW_RELEASE) {
         if (key == GLFW_KEY_W || key == GLFW_KEY_S) {
-            moveSpeedY = 0.0f;
+            moveSpeedX = 0.0f; // Stop forward/backward movement
         }
         if (key == GLFW_KEY_A || key == GLFW_KEY_D) {
-            moveSpeedX = 0.0f;
+            moveSpeedY = 0.0f; // Stop left/right movement
         }
     }
 }
 
 void updateMovement() {
+
+    glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, glm::vec3(0.0f, 1.0f, 0.0f)));
+
     // Ensure these variables are declared in globals.h
-    characterPosX += (cameraFront.x * moveSpeedX + cameraFront.z * moveSpeedY) * deltaTime;
-    characterPosZ += (cameraFront.z * moveSpeedX - cameraFront.x * moveSpeedY) * deltaTime;
+    characterPosX += (cameraFront.x * moveSpeedX + cameraRight.x * moveSpeedY) * deltaTime;
+    characterPosZ += (cameraFront.z * moveSpeedX + cameraRight.z * moveSpeedY) * deltaTime;
 
     // Vertical movement (jumping logic)
     if (isJumping) {
@@ -60,7 +63,8 @@ void updateMovement() {
             isJumping = false; // Reset jump state
             verticalVelocity = 0.0f; // Reset vertical velocity
         }
-    } else {
+    }
+    else {
         characterPosY = 0.0f; // Ensure the character stays grounded
     }
 }

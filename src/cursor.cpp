@@ -24,7 +24,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
-    float sensitivity = 0.1f; // Mouse sensitivity
+    float sensitivity = 0.01f; // Mouse sensitivity
     xoffset *= sensitivity;
     yoffset *= sensitivity;
 
