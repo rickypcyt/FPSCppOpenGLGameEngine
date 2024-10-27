@@ -32,7 +32,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         } else if (key == GLFW_KEY_D) {
             moveSpeedX = moveSpeed;
         } else if (key == GLFW_KEY_SPACE && !isJumping) {
-            std::cout << "Jump initiated!" << std::endl; // Debug print
+            std::cout << "Jump initiated!" << std::endl;
             isJumping = true;
             verticalVelocity = jumpHeight;
         } else if (key == GLFW_KEY_ESCAPE) {
@@ -41,7 +41,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 
     if (action == GLFW_RELEASE) {
-        // Reset movement when the key is released
         if (key == GLFW_KEY_W || key == GLFW_KEY_S) {
             moveSpeedY = 0.0f;
         }
@@ -71,6 +70,9 @@ void updateMovement() {
             characterPosY = 0.0f; // Reset to ground level
             isJumping = false; // Reset jump state
             verticalVelocity = 0.0f; // Reset vertical velocity
+            std::cout << "Landed! characterPosY: " << characterPosY << std::endl;
+        } else {
+            std::cout << "Jumping! characterPosY: " << characterPosY << std::endl;
         }
     } else {
         // Ensure the character stays on the ground when not jumping

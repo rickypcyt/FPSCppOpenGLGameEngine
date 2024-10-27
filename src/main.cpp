@@ -78,9 +78,13 @@ int main() {
 
             // Update view transformation only when necessary
             glLoadIdentity();
-            gluLookAt(characterPosX, 1.0f, characterPosZ,
-                      characterPosX, 1.0f, characterPosZ - 1.0f,
-                      0.0f, 1.0f, 0.0f);
+            // Camera setup in main loop
+        gluLookAt(
+            characterPosX, 1.5f + characterPosY, characterPosZ + 5.0f, // Position slightly above and behind the character
+            characterPosX, 1.0f + characterPosY, characterPosZ,        // Look toward where the character is facing
+            0.0f, 1.0f, 0.0f                                          // Up direction
+        );
+
 
             drawFloor(); // Draw the floor
             updateMovement(); // Update movement based on input
