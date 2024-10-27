@@ -244,7 +244,10 @@ CMakeFiles/My3DGame.dir/cursor.cpp.o: cursor.cpp \
   /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/syslimits.h
 
 CMakeFiles/My3DGame.dir/globals.cpp.o: globals.cpp \
-  /home/ricky/coding/GccGame-main/include/globals.h \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GLFW/glfw3.h \
+  /usr/include/KHR/khrplatform.h \
   /usr/include/alloca.h \
   /usr/include/assert.h \
   /usr/include/bits/atomic_wide_counter.h \
