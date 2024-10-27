@@ -9,6 +9,6 @@ find_package(glfw3 REQUIRED)
 
 include_directories(include)
 
-add_executable(My3DGame src/main.cpp src/movement.cpp src/renderer.cpp src/globals.cpp)
+add_executable(My3DGame src/main.cpp src/movement.cpp src/renderer.cpp src/globals.cpp src/cursor.cpp)
 
 target_link_libraries(My3DGame ${OPENGL_LIBRARIES} GLEW::GLEW glfw)

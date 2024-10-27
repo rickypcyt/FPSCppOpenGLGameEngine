@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/My3DGame.dir/src/main.cpp.o CMakeFiles/My3DGame.dir/src/renderer.cpp.o CMakeFiles/My3DGame.dir/src/movement.cpp.o -o My3DGame  /usr/lib/libGL.so /usr/lib/libGLU.so -lglfw -lGLEW -lEGL -lGL -lGLU -lOpenGL -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath

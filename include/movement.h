@@ -17,6 +17,13 @@ extern GLfloat verticalVelocity; // Current vertical velocity
 extern const GLint WIDTH;   
 extern const GLint HEIGHT;  
 
+extern float characterPosX, characterPosY, characterPosZ; // Define in a shared header
+extern float deltaTime;
+extern float moveSpeed; // Ensure it's also declared here
+extern bool isJumping;
+extern float verticalVelocity;
+
+
 // Function declarations
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);

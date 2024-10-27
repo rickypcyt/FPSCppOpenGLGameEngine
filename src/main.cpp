@@ -4,15 +4,15 @@
 #include <chrono>
 #include <sstream>
 #include <thread>
+
 #include "../include/renderer.h"
 #include "../include/movement.h"
 #include "../include/globals.h"
+#include "../include/cursor.h"
 
 float lastFrameTime = 0.0f;
-
-double lastTime =0.0f;
-
-const int TARGET_FPS = 60;
+float lastTime = 0.0f; // Declare lastTime here
+const float TARGET_FPS = 60.0f;
 const float FRAME_DURATION = 1000.0f / TARGET_FPS; // in milliseconds
 
 void displayFPS(float fps) {
@@ -22,7 +22,6 @@ void displayFPS(float fps) {
 }
 
 using namespace std::chrono;
-high_resolution_clock::time_point lastTimeClock = high_resolution_clock::now();
 int frameCount = 0;
 float fps = 0.0f;
 
@@ -58,59 +57,65 @@ int main() {
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
+    
+    // Lock the cursor
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     setupProjection(); // Set up projection once during initialization
 
     high_resolution_clock::time_point lastFrameTimePoint = high_resolution_clock::now();
 
-    // Rendering loop
-    // Rendering loop
-while (!glfwWindowShouldClose(window)) {
-    // Start measuring frame time
-    auto frameStartTime = high_resolution_clock::now();
+    // Inside your main loop
+    while (!glfwWindowShouldClose(window)) {
+        auto frameStartTime = high_resolution_clock::now();
 
-    // Frame timing logic to calculate deltaTime if using a non-fixed approach
-    float currentFrame = glfwGetTime();
-    deltaTime = currentFrame - lastFrameTime;
-    lastFrameTime = currentFrame;
+        // Frame timing logic
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrameTime;
+        lastFrameTime = currentFrame;
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
+        // Clear buffers
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glLoadIdentity();
 
-    // Camera position (adjusted for a smoother view)
-    gluLookAt(
-        characterPosX, 1.5f + characterPosY, characterPosZ + 5.0f, // Position slightly above and behind the character
-        characterPosX, 1.0f + characterPosY, characterPosZ,        // Look toward where the character is facing
-        0.0f, 1.0f, 0.0f                                          // Up direction
-    );
+        // Camera setup
+        glm::vec3 cameraPosition = glm::vec3(characterPosX, characterPosY + 1.5f, characterPosZ);
+        glm::vec3 cameraTarget = cameraPosition + cameraFront;
+        gluLookAt(
+            cameraPosition.x, cameraPosition.y, cameraPosition.z,
+            cameraTarget.x, cameraTarget.y, cameraTarget.z,
+            0.0f, 1.0f, 0.0f
+        );
 
-    // Draw scene
-    drawFloor();
-    updateMovement();
+        // Draw scene
+        drawFloor();
+        updateMovement(); // This will now move based on camera direction
 
-    // Display FPS every second
-    frameCount++;
-    if (glfwGetTime() - lastTime >= 1.0) {
-        displayFPS(frameCount);
-        frameCount = 0;
-        lastTime += 1.0;
+        // FPS display logic
+        frameCount++;
+        if (glfwGetTime() - lastTime >= 1.0) {
+            displayFPS(frameCount);
+            frameCount = 0;
+            lastTime += 1.0;
+        }
+
+        // Swap buffers and poll events
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+        // Frame capping logic
+        auto frameEndTime = high_resolution_clock::now();
+        duration<float, std::milli> frameDuration = frameEndTime - frameStartTime;
+
+        if (frameDuration.count() < FRAME_DURATION) {
+            std::this_thread::sleep_for(milliseconds(static_cast<int>(FRAME_DURATION - frameDuration.count())));
+        }
     }
 
-    // Swap buffers and poll events
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-
-    // Measure the elapsed frame time and cap at 60 FPS
-    auto frameEndTime = high_resolution_clock::now();
-    duration<float, std::milli> frameDuration = frameEndTime - frameStartTime;
-
-    if (frameDuration.count() < FRAME_DURATION) {
-        std::this_thread::sleep_for(milliseconds(static_cast<int>(FRAME_DURATION - frameDuration.count())));
-    }
-}
 
 
-
+    // Clean up
     glfwTerminate();
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     return 0;
 }

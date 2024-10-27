@@ -129,6 +129,30 @@ My3DGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/build
 .PHONY : My3DGame/fast
 
+cursor.o: cursor.cpp.o
+.PHONY : cursor.o
+
+# target to build an object file
+cursor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/cursor.cpp.o
+.PHONY : cursor.cpp.o
+
+cursor.i: cursor.cpp.i
+.PHONY : cursor.i
+
+# target to preprocess a source file
+cursor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/cursor.cpp.i
+.PHONY : cursor.cpp.i
+
+cursor.s: cursor.cpp.s
+.PHONY : cursor.s
+
+# target to generate assembly for a file
+cursor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/cursor.cpp.s
+.PHONY : cursor.cpp.s
+
 globals.o: globals.cpp.o
 .PHONY : globals.o
 
@@ -234,6 +258,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... My3DGame"
+	@echo "... cursor.o"
+	@echo "... cursor.i"
+	@echo "... cursor.s"
 	@echo "... globals.o"
 	@echo "... globals.i"
 	@echo "... globals.s"

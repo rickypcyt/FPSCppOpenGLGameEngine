@@ -1,3 +1,0 @@
-/home/ricky/Documents/Codeo2/GCCGAME/build/CMakeFiles/My3DGame.dir
-/home/ricky/Documents/Codeo2/GCCGAME/build/CMakeFiles/edit_cache.dir
-/home/ricky/Documents/Codeo2/GCCGAME/build/CMakeFiles/rebuild_cache.dir

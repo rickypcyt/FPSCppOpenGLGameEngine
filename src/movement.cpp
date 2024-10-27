@@ -1,36 +1,30 @@
 #include <GLFW/glfw3.h>
-#include <GL/glu.h>
 #include <cmath>
 #include <iostream>
-#include <ostream>
 #include "../include/movement.h"
 #include "../include/globals.h"
 
 // Movement speed and direction variables
-GLfloat moveSpeed = 5.0f;
-GLfloat moveSpeedX = 0.0f;
-GLfloat moveSpeedY = 0.0f;
+float moveSpeed = 5.0f; // Changed from GLfloat to float
+float moveSpeedX = 0.0f;
+float moveSpeedY = 0.0f;
 
 // Jump variables
 bool isJumping = false; 
-GLfloat jumpHeight = 5.0f; 
-GLfloat verticalVelocity = 0.0f;
-
-// Window dimensions
-const GLint WIDTH = 800;   
-const GLint HEIGHT = 600; 
+float jumpHeight = 5.0f; 
+float verticalVelocity = 0.0f;
 
 // Key callback function for handling keyboard input
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         if (key == GLFW_KEY_W) {
-            moveSpeedY = -moveSpeed;
+            moveSpeedY = -moveSpeed; // Move forward
         } else if (key == GLFW_KEY_S) {
-            moveSpeedY = moveSpeed;
+            moveSpeedY = moveSpeed; // Move backward
         } else if (key == GLFW_KEY_A) {
-            moveSpeedX = -moveSpeed;
+            moveSpeedX = -moveSpeed; // Strafe left
         } else if (key == GLFW_KEY_D) {
-            moveSpeedX = moveSpeed;
+            moveSpeedX = moveSpeed; // Strafe right
         } else if (key == GLFW_KEY_SPACE && !isJumping) {
             std::cout << "Jump initiated!" << std::endl;
             isJumping = true;
@@ -50,15 +44,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-// Mouse callback function for handling mouse input
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-    // Implement mouse movement handling if needed
-}
-
 void updateMovement() {
-    // Horizontal movement based on input
-    characterPosX += moveSpeedX * deltaTime; 
-    characterPosZ += moveSpeedY * deltaTime;
+    // Ensure these variables are declared in globals.h
+    characterPosX += (cameraFront.x * moveSpeedX + cameraFront.z * moveSpeedY) * deltaTime;
+    characterPosZ += (cameraFront.z * moveSpeedX - cameraFront.x * moveSpeedY) * deltaTime;
 
     // Vertical movement (jumping logic)
     if (isJumping) {
@@ -75,5 +64,3 @@ void updateMovement() {
         characterPosY = 0.0f; // Ensure the character stays grounded
     }
 }
-
-
