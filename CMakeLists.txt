@@ -6,9 +6,25 @@ set(CMAKE_CXX_STANDARD 11)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(GLUT REQUIRED) # Add this line to find FreeGLUT
+find_package(GLU REQUIRED)   # Add this line to find GLU
 
 include_directories(include)
 
-add_executable(My3DGame src/main.cpp src/movement.cpp src/renderer.cpp src/globals.cpp src/cursor.cpp)
+# Add the source files for your project
+add_executable(My3DGame 
+    src/main.cpp 
+    src/movement.cpp 
+    src/renderer.cpp 
+    src/globals.cpp 
+    src/cursor.cpp
+)
 
-target_link_libraries(My3DGame ${OPENGL_LIBRARIES} GLEW::GLEW glfw)
+# Link against OpenGL, GLEW, GLFW, FreeGLUT, and GLU
+target_link_libraries(My3DGame 
+    ${OPENGL_LIBRARIES} 
+    GLEW::GLEW 
+    glfw 
+    GLUT::GLUT  # Link to FreeGLUT
+    ${GLU_LIBRARIES}  # Link to GLU
+)

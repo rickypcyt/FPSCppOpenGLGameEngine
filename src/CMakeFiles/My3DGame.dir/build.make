@@ -160,6 +160,9 @@ My3DGame: /usr/lib/libGL.so
 My3DGame: /usr/lib/libGLU.so
 My3DGame: /usr/lib/libGLEW.so
 My3DGame: /usr/lib/libglfw.so.3.4
+My3DGame: /usr/lib/libglut.so
+My3DGame: /usr/lib/libXmu.so
+My3DGame: /usr/lib/libXi.so
 My3DGame: CMakeFiles/My3DGame.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ricky/coding/GccGame-main/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable My3DGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/My3DGame.dir/link.txt --verbose=$(VERBOSE)

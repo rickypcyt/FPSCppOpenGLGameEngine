@@ -4,11 +4,13 @@
 #include <chrono>
 #include <sstream>
 #include <thread>
-
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "../include/renderer.h"
 #include "../include/movement.h"
 #include "../include/globals.h"
 #include "../include/cursor.h"
+#include <GL/freeglut.h> // Include this for text rendering
 
 float lastFrameTime = 0.0f;
 float lastTime = 0.0f; // Declare lastTime here
@@ -28,8 +30,17 @@ float fps = 0.0f;
 void setupProjection() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
+    gluPerspective(45.0f, (float)1920 / (float)1080, 0.1f, 100.0f); // Aspect ratio set to 1920:1080
     glMatrixMode(GL_MODELVIEW);
+}
+
+
+void renderText(const std::string& text, float x, float y) {
+    glRasterPos2f(x, y); // Position for rendering
+    for (char c : text) {
+        // Use bitmap font to render each character
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
+    }
 }
 
 int main() {
@@ -38,13 +49,20 @@ int main() {
         return -1;
     }
 
-    glfwWindowHint(GLFW_SAMPLES, 4);
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "MyOpenGLGame", NULL, NULL);
+    // Get the primary monitor
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+
+    // Create a fullscreen window
+    GLFWwindow* window = glfwCreateWindow(1920, 1080, "MyOpenGLGame", monitor, NULL);    
     if (!window) {
         std::cerr << "Error creating GLFW window\n";
         glfwTerminate();
         return -1;
     }
+
+    // Set the viewport
+    glViewport(0, 0, 1920, 1080); // Adjust the viewport to match the window size
 
     glfwMakeContextCurrent(window);
     glEnable(GL_MULTISAMPLE);
@@ -54,6 +72,11 @@ int main() {
         std::cerr << "Error initializing GLEW\n";
         return -1;
     }
+
+    // Initialize FreeGLUT
+    int argc = 0;
+    char** argv = nullptr;
+    glutInit(&argc, argv); // Initialize FreeGLUT
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
@@ -94,10 +117,16 @@ int main() {
         // FPS display logic
         frameCount++;
         if (glfwGetTime() - lastTime >= 1.0) {
-            displayFPS(frameCount);
+            fps = frameCount; // Update fps with the frame count
+            displayFPS(fps); // Log FPS to console
             frameCount = 0;
             lastTime += 1.0;
         }
+
+        // Render the FPS in the left corner
+        std::ostringstream fpsStream;
+        fpsStream << "FPS: " << fps; // Use updated fps value
+        renderText(fpsStream.str(), -0.9f, 0.9f); // Adjust x, y as needed
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
@@ -111,8 +140,6 @@ int main() {
             std::this_thread::sleep_for(milliseconds(static_cast<int>(FRAME_DURATION - frameDuration.count())));
         }
     }
-
-
 
     // Clean up
     glfwTerminate();

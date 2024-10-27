@@ -142,9 +142,6 @@ CMakeFiles/My3DGame.dir/main.cpp.o: \
  /usr/include/c++/14.2.1/bits/uses_allocator.h \
  /usr/include/c++/14.2.1/bits/unique_ptr.h \
  /usr/include/c++/14.2.1/bits/this_thread_sleep.h \
- /home/ricky/coding/GccGame-main/src/../include/renderer.h \
- /home/ricky/coding/GccGame-main/src/../include/movement.h \
- /home/ricky/coding/GccGame-main/src/../include/globals.h \
  /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
  /usr/include/c++/14.2.1/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
@@ -273,4 +270,22 @@ CMakeFiles/My3DGame.dir/main.cpp.o: \
  /usr/include/glm/detail/type_half.hpp \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
  /usr/include/glm/detail/func_integer.inl \
- /home/ricky/coding/GccGame-main/src/../include/cursor.h
+ /usr/include/glm/gtc/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_projection.hpp \
+ /usr/include/glm/gtc/constants.hpp \
+ /usr/include/glm/ext/scalar_constants.hpp \
+ /usr/include/glm/ext/scalar_constants.inl \
+ /usr/include/glm/gtc/constants.inl \
+ /usr/include/glm/ext/matrix_projection.inl \
+ /usr/include/glm/ext/matrix_clip_space.hpp \
+ /usr/include/glm/ext/matrix_clip_space.inl \
+ /usr/include/glm/ext/matrix_transform.hpp \
+ /usr/include/glm/ext/matrix_transform.inl \
+ /usr/include/glm/gtc/matrix_transform.inl \
+ /home/ricky/coding/GccGame-main/src/../include/renderer.h \
+ /home/ricky/coding/GccGame-main/src/../include/movement.h \
+ /home/ricky/coding/GccGame-main/src/../include/globals.h \
+ /home/ricky/coding/GccGame-main/src/../include/cursor.h \
+ /usr/include/GL/freeglut.h /usr/include/GL/freeglut_std.h \
+ /usr/include/c++/14.2.1/stdlib.h /usr/include/GL/freeglut_ext.h \
+ /usr/include/GL/freeglut_ucall.h

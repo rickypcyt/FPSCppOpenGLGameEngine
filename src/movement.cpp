@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include "../include/movement.h"
-#include "../include/globals.h"
+#include "../include/globals.h" // Include the globals header
 
 // Movement speed and direction variables
 float moveSpeed = 5.0f; // Changed from GLfloat to float
@@ -31,6 +31,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             verticalVelocity = jumpHeight;
         } else if (key == GLFW_KEY_ESCAPE) {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
+        } else if (key == GLFW_KEY_EQUAL && (mods & GLFW_MOD_CONTROL)) { // Control + +
+            sensitivity += 0.01f; // Increase sensitivity
+            std::cout << "Mouse sensitivity increased to: " << sensitivity << std::endl;
+        } else if (key == GLFW_KEY_MINUS && (mods & GLFW_MOD_CONTROL)) { // Control + -
+            sensitivity = std::max(0.01f, sensitivity - 0.01f); // Decrease sensitivity but not below 0.01
+            std::cout << "Mouse sensitivity decreased to: " << sensitivity << std::endl;
         }
     }
 
@@ -45,26 +51,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 }
 
 void updateMovement() {
+    // Apply movement speed in the direction the camera is facing
+    characterPosX += cameraFront.x * moveSpeedX * deltaTime;
+    characterPosZ += cameraFront.z * moveSpeedX * deltaTime;
 
-    glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, glm::vec3(0.0f, 1.0f, 0.0f)));
+    // Strafe left/right
+    characterPosX += moveSpeedY * deltaTime;
 
-    // Ensure these variables are declared in globals.h
-    characterPosX += (cameraFront.x * moveSpeedX + cameraRight.x * moveSpeedY) * deltaTime;
-    characterPosZ += (cameraFront.z * moveSpeedX + cameraRight.z * moveSpeedY) * deltaTime;
-
-    // Vertical movement (jumping logic)
+    // Jump physics
     if (isJumping) {
-        characterPosY += verticalVelocity * deltaTime; // Update vertical position
-        verticalVelocity -= 9.81f * deltaTime; // Apply gravity
+        verticalVelocity -= 9.81f * deltaTime; // Gravity
+        characterPosY += verticalVelocity * deltaTime;
 
-        // Check if the character has landed
+        // Reset jump when touching ground (Y = 0)
         if (characterPosY <= 0.0f) {
-            characterPosY = 0.0f; // Reset to ground level
-            isJumping = false; // Reset jump state
-            verticalVelocity = 0.0f; // Reset vertical velocity
+            characterPosY = 0.0f;
+            isJumping = false;
+            verticalVelocity = 0.0f; // Reset velocity
         }
-    }
-    else {
-        characterPosY = 0.0f; // Ensure the character stays grounded
     }
 }

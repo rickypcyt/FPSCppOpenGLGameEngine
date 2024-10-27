@@ -24,7 +24,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
-    float sensitivity = 0.01f; // Mouse sensitivity
+    float sensitivity = 0.1f; // Adjust this sensitivity value
     xoffset *= sensitivity;
     yoffset *= sensitivity;
 
@@ -41,11 +41,5 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraFront = glm::normalize(front); // Update global camera front vector
-}
-
-// Function to update the camera position or orientation
-void updateCamera(float xpos, float ypos) {
-    // This function is currently unused, as mouse movement is handled in mouse_callback.
-    // Future implementations could add camera position logic based on inputs.
+    cameraFront = glm::normalize(front);
 }

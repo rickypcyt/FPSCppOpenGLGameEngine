@@ -1,4 +1,5 @@
 #include <GL/gl.h>
+
 #include "../include/renderer.h"
 
 void drawFloor() {
@@ -15,8 +16,11 @@ void drawFloor() {
     glColor3f(1.0f, 1.0f, 1.0f); // White color for grid lines
     glBegin(GL_LINES);
     for (float i = -10.0f; i <= 10.0f; i += 1.0f) {
+        // Vertical lines
         glVertex3f(i, 0.0f, -10.0f);
         glVertex3f(i, 0.0f, 10.0f);
+        
+        // Horizontal lines
         glVertex3f(-10.0f, 0.0f, i);
         glVertex3f(10.0f, 0.0f, i);
     }
