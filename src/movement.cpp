@@ -56,7 +56,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 }
 
 void updateMovement() {
-    // Horizontal movement
+    // Horizontal movement based on input
     characterPosX += moveSpeedX * deltaTime; 
     characterPosZ += moveSpeedY * deltaTime;
 
@@ -70,12 +70,10 @@ void updateMovement() {
             characterPosY = 0.0f; // Reset to ground level
             isJumping = false; // Reset jump state
             verticalVelocity = 0.0f; // Reset vertical velocity
-            std::cout << "Landed! characterPosY: " << characterPosY << std::endl;
-        } else {
-            std::cout << "Jumping! characterPosY: " << characterPosY << std::endl;
         }
     } else {
-        // Ensure the character stays on the ground when not jumping
-        characterPosY = 0.0f;
+        characterPosY = 0.0f; // Ensure the character stays grounded
     }
 }
+
+

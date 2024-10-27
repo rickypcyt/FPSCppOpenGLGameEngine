@@ -10,6 +10,8 @@
 
 float lastFrameTime = 0.0f;
 
+double lastTime =0.0f;
+
 const int TARGET_FPS = 60;
 const float FRAME_DURATION = 1000.0f / TARGET_FPS; // in milliseconds
 
@@ -20,7 +22,7 @@ void displayFPS(float fps) {
 }
 
 using namespace std::chrono;
-high_resolution_clock::time_point lastTime = high_resolution_clock::now();
+high_resolution_clock::time_point lastTimeClock = high_resolution_clock::now();
 int frameCount = 0;
 float fps = 0.0f;
 
@@ -61,56 +63,53 @@ int main() {
 
     high_resolution_clock::time_point lastFrameTimePoint = high_resolution_clock::now();
 
-    while (!glfwWindowShouldClose(window)) {
-        auto currentFrameTimePoint = high_resolution_clock::now();
-        duration<float> elapsedTime = currentFrameTimePoint - lastFrameTimePoint;
-        float elapsedMillis = elapsedTime.count() * 1000.0f;
+    // Rendering loop
+    // Rendering loop
+while (!glfwWindowShouldClose(window)) {
+    // Start measuring frame time
+    auto frameStartTime = high_resolution_clock::now();
 
-        // Frame rate cap logic
-        if (elapsedMillis >= FRAME_DURATION) {
-            lastFrameTimePoint = currentFrameTimePoint;
+    // Frame timing logic to calculate deltaTime if using a non-fixed approach
+    float currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrameTime;
+    lastFrameTime = currentFrame;
 
-            float currentFrame = glfwGetTime();
-            deltaTime = currentFrame - lastFrameTime;
-            lastFrameTime = currentFrame;
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
 
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Camera position (adjusted for a smoother view)
+    gluLookAt(
+        characterPosX, 1.5f + characterPosY, characterPosZ + 5.0f, // Position slightly above and behind the character
+        characterPosX, 1.0f + characterPosY, characterPosZ,        // Look toward where the character is facing
+        0.0f, 1.0f, 0.0f                                          // Up direction
+    );
 
-            // Update view transformation only when necessary
-            glLoadIdentity();
-            // Camera setup in main loop
-        gluLookAt(
-            characterPosX, 1.5f + characterPosY, characterPosZ + 5.0f, // Position slightly above and behind the character
-            characterPosX, 1.0f + characterPosY, characterPosZ,        // Look toward where the character is facing
-            0.0f, 1.0f, 0.0f                                          // Up direction
-        );
+    // Draw scene
+    drawFloor();
+    updateMovement();
 
-
-            drawFloor(); // Draw the floor
-            updateMovement(); // Update movement based on input
-
-            frameCount++;
-
-            // Get the current time
-            auto currentTime = high_resolution_clock::now();
-            duration<float> deltaTimeFPS = currentTime - lastTime;
-
-            // Update FPS every second
-            if (deltaTimeFPS.count() >= 1.0f) {
-                fps = frameCount;
-                frameCount = 0;
-                lastTime = currentTime;
-                displayFPS(fps);
-            }
-
-            glfwSwapBuffers(window);
-        } else {
-            // Sleep for the remaining time to achieve the target frame duration
-            std::this_thread::sleep_for(milliseconds(static_cast<int>(FRAME_DURATION - elapsedMillis)));
-        }
-
-        glfwPollEvents();
+    // Display FPS every second
+    frameCount++;
+    if (glfwGetTime() - lastTime >= 1.0) {
+        displayFPS(frameCount);
+        frameCount = 0;
+        lastTime += 1.0;
     }
+
+    // Swap buffers and poll events
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+
+    // Measure the elapsed frame time and cap at 60 FPS
+    auto frameEndTime = high_resolution_clock::now();
+    duration<float, std::milli> frameDuration = frameEndTime - frameStartTime;
+
+    if (frameDuration.count() < FRAME_DURATION) {
+        std::this_thread::sleep_for(milliseconds(static_cast<int>(FRAME_DURATION - frameDuration.count())));
+    }
+}
+
+
 
     glfwTerminate();
     return 0;
