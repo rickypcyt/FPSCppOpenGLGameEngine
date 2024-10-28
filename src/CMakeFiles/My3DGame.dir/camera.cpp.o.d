@@ -1,7 +1,9 @@
 CMakeFiles/My3DGame.dir/camera.cpp.o: \
  /home/ricky/coding/GccGame-main/src/camera.cpp \
- /usr/include/stdc-predef.h /usr/include/glm/glm.hpp \
- /usr/include/glm/detail/_fixes.hpp /usr/include/c++/14.2.1/cmath \
+ /usr/include/stdc-predef.h \
+ /home/ricky/coding/GccGame-main/src/../include/camera.h \
+ /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
+ /usr/include/c++/14.2.1/cmath \
  /usr/include/c++/14.2.1/bits/requires_hosted.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -211,4 +213,30 @@ CMakeFiles/My3DGame.dir/camera.cpp.o: \
  /usr/include/glm/ext/vector_uint1.hpp \
  /usr/include/glm/ext/vector_uint1_sized.hpp \
  /usr/include/c++/14.2.1/cstring /usr/include/string.h \
- /usr/include/strings.h /usr/include/glm/gtc/type_ptr.inl
+ /usr/include/strings.h /usr/include/glm/gtc/type_ptr.inl \
+ /usr/include/glm/gtx/quaternion.hpp \
+ /usr/include/glm/ext/quaternion_exponential.hpp \
+ /usr/include/glm/ext/quaternion_exponential.inl \
+ /usr/include/glm/gtx/norm.hpp /usr/include/glm/gtx/component_wise.hpp \
+ /usr/include/glm/detail/setup.hpp \
+ /usr/include/glm/gtx/component_wise.inl \
+ /usr/include/glm/ext/scalar_common.hpp \
+ /usr/include/glm/ext/scalar_common.inl /usr/include/glm/gtx/norm.inl \
+ /usr/include/glm/gtx/quaternion.inl /usr/include/c++/14.2.1/array \
+ /usr/include/c++/14.2.1/compare /usr/include/c++/14.2.1/initializer_list \
+ /usr/include/c++/14.2.1/bits/functexcept.h \
+ /usr/include/c++/14.2.1/bits/exception_defines.h \
+ /usr/include/c++/14.2.1/bits/stl_algobase.h \
+ /usr/include/c++/14.2.1/ext/numeric_traits.h \
+ /usr/include/c++/14.2.1/bits/stl_pair.h \
+ /usr/include/c++/14.2.1/bits/move.h \
+ /usr/include/c++/14.2.1/bits/utility.h \
+ /usr/include/c++/14.2.1/bits/stl_iterator_base_types.h \
+ /usr/include/c++/14.2.1/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/14.2.1/bits/concept_check.h \
+ /usr/include/c++/14.2.1/debug/assertions.h \
+ /usr/include/c++/14.2.1/bits/stl_iterator.h \
+ /usr/include/c++/14.2.1/bits/ptr_traits.h \
+ /usr/include/c++/14.2.1/debug/debug.h \
+ /usr/include/c++/14.2.1/bits/predefined_ops.h \
+ /usr/include/c++/14.2.1/bits/range_access.h
