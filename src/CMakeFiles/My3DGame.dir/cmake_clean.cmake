@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/My3DGame.dir/camera.cpp.o"
+  "CMakeFiles/My3DGame.dir/camera.cpp.o.d"
   "CMakeFiles/My3DGame.dir/cursor.cpp.o"
   "CMakeFiles/My3DGame.dir/cursor.cpp.o.d"
   "CMakeFiles/My3DGame.dir/globals.cpp.o"

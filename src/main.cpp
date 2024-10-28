@@ -112,7 +112,7 @@ int main() {
 
         // Draw scene
         drawFloor();
-        updateMovement(); // This will now move based on camera direction
+        updateMovement(deltaTime); // This will now move based on camera direction
 
         // FPS display logic
         frameCount++;

@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ricky/coding/GccGame-main/src/camera.cpp" "CMakeFiles/My3DGame.dir/camera.cpp.o" "gcc" "CMakeFiles/My3DGame.dir/camera.cpp.o.d"
   "/home/ricky/coding/GccGame-main/src/cursor.cpp" "CMakeFiles/My3DGame.dir/cursor.cpp.o" "gcc" "CMakeFiles/My3DGame.dir/cursor.cpp.o.d"
   "/home/ricky/coding/GccGame-main/src/globals.cpp" "CMakeFiles/My3DGame.dir/globals.cpp.o" "gcc" "CMakeFiles/My3DGame.dir/globals.cpp.o.d"
   "/home/ricky/coding/GccGame-main/src/main.cpp" "CMakeFiles/My3DGame.dir/main.cpp.o" "gcc" "CMakeFiles/My3DGame.dir/main.cpp.o.d"

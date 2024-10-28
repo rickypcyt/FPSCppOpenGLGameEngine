@@ -18,6 +18,7 @@ add_executable(My3DGame
     src/renderer.cpp 
     src/globals.cpp 
     src/cursor.cpp
+    src/camera.cpp
 )
 
 # Link against OpenGL, GLEW, GLFW, FreeGLUT, and GLU
