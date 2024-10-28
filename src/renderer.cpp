@@ -1,9 +1,7 @@
 #include <GL/gl.h>
-
 #include "../include/renderer.h"
 
 void drawFloor() {
-    // Increase the size of the floor
     float size = 20.0f; // New size for the floor
 
     // Draw the floor
@@ -14,9 +12,6 @@ void drawFloor() {
         glVertex3f(size, 0.0f, size);
         glVertex3f(-size, 0.0f, size);
     glEnd();
-
-    // Enable line width for better visibility
-    glLineWidth(1.5f); // Set line width to 1.5 (you can adjust this)
 
     // Draw grid lines on the floor
     glColor3f(1.0f, 1.0f, 1.0f); // White color for grid lines

@@ -188,7 +188,8 @@ My3DGame: CMakeFiles/My3DGame.dir/cursor.cpp.o
 My3DGame: CMakeFiles/My3DGame.dir/camera.cpp.o
 My3DGame: CMakeFiles/My3DGame.dir/glad.c.o
 My3DGame: CMakeFiles/My3DGame.dir/build.make
-My3DGame: /usr/lib/libGL.so
+My3DGame: /usr/lib/libOpenGL.so
+My3DGame: /usr/lib/libGLX.so
 My3DGame: /usr/lib/libGLU.so
 My3DGame: /usr/lib/libGLEW.so
 My3DGame: /usr/lib/libglfw.so.3.4

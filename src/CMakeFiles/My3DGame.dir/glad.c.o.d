@@ -32,8 +32,9 @@ CMakeFiles/My3DGame.dir/glad.c.o: \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-float.h /usr/include/string.h \
  /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
- /usr/include/strings.h /home/ricky/coding/GccGame-main/include/glad.h \
- /home/ricky/coding/GccGame-main/include/khrplatform.h \
+ /usr/include/strings.h \
+ /home/ricky/coding/GccGame-main/include/glad/glad.h \
+ /home/ricky/coding/GccGame-main/include/glad/khrplatform.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-uintn.h /usr/include/bits/stdint-least.h \

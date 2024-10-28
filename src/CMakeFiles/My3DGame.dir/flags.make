@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/home/ricky/coding/GccGame-main/include
+C_INCLUDES = -I/home/ricky/coding/GccGame-main/include -I/home/ricky/coding/GccGame-main/include/glad
 
 C_FLAGS = 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/ricky/coding/GccGame-main/include
+CXX_INCLUDES = -I/home/ricky/coding/GccGame-main/include -I/home/ricky/coding/GccGame-main/include/glad
 
 CXX_FLAGS = -std=gnu++11
 
