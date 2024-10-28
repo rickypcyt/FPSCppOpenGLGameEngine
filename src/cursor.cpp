@@ -9,30 +9,32 @@ float lastY = HEIGHT / 2.0f;
 bool firstMouse = true;
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-    if (firstMouse) {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
+    static double lastX = WIDTH / 2.0;
+    static double lastY = HEIGHT / 2.0;
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos;
+    double xoffset = xpos - lastX; // Calculate x offset
+    double yoffset = lastY - ypos; // Calculate y offset (reverse the y-axis)
     lastX = xpos;
     lastY = ypos;
 
-    float sensitivity = 0.1f;
-    xoffset *= sensitivity;
-    yoffset *= sensitivity;
+    const float mouseScaleFactor = 0.1f; // Adjust this factor for finer control
 
-    yaw += glm::radians(xoffset);
-    pitch += glm::radians(yoffset);
+yaw += xoffset * sensitivity * mouseScaleFactor;
+pitch += yoffset * sensitivity * mouseScaleFactor;
 
-    if (pitch > glm::radians(89.0f)) pitch = glm::radians(89.0f);
-    if (pitch < glm::radians(-89.0f)) pitch = glm::radians(-89.0f);
 
+    // Constrain pitch to avoid flipping the camera
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
+
+    // Update the camera direction based on yaw and pitch
     glm::vec3 direction;
-    direction.x = cos(yaw) * cos(pitch);
-    direction.y = sin(pitch);
-    direction.z = sin(yaw) * cos(pitch);
+    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    direction.y = sin(glm::radians(pitch));
+    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
     cameraFront = glm::normalize(direction);
 }
