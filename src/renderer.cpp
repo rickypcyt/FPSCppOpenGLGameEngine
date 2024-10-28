@@ -3,26 +3,32 @@
 #include "../include/renderer.h"
 
 void drawFloor() {
+    // Increase the size of the floor
+    float size = 20.0f; // New size for the floor
+
     // Draw the floor
     glColor3f(0.5f, 0.5f, 0.5f); // Gray color for the floor
     glBegin(GL_QUADS);
-        glVertex3f(-10.0f, 0.0f, -10.0f);
-        glVertex3f(10.0f, 0.0f, -10.0f);
-        glVertex3f(10.0f, 0.0f, 10.0f);
-        glVertex3f(-10.0f, 0.0f, 10.0f);
+        glVertex3f(-size, 0.0f, -size);
+        glVertex3f(size, 0.0f, -size);
+        glVertex3f(size, 0.0f, size);
+        glVertex3f(-size, 0.0f, size);
     glEnd();
+
+    // Enable line width for better visibility
+    glLineWidth(1.5f); // Set line width to 1.5 (you can adjust this)
 
     // Draw grid lines on the floor
     glColor3f(1.0f, 1.0f, 1.0f); // White color for grid lines
     glBegin(GL_LINES);
-    for (float i = -10.0f; i <= 10.0f; i += 1.0f) {
+    for (float i = -size; i <= size; i += 1.0f) {
         // Vertical lines
-        glVertex3f(i, 0.0f, -10.0f);
-        glVertex3f(i, 0.0f, 10.0f);
+        glVertex3f(i, 0.0f, -size);
+        glVertex3f(i, 0.0f, size);
         
         // Horizontal lines
-        glVertex3f(-10.0f, 0.0f, i);
-        glVertex3f(10.0f, 0.0f, i);
+        glVertex3f(-size, 0.0f, i);
+        glVertex3f(size, 0.0f, i);
     }
     glEnd();
 
