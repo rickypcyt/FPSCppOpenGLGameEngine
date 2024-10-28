@@ -20,4 +20,4 @@ glm::vec3 cameraPos(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f); // Initial direction the camera faces
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);     // Upward direction for the camera
 
-float sensitivity = 0.025f;
+float sensitivity = 0.05f;

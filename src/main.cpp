@@ -9,12 +9,15 @@
 
 #include "../include/renderer.h"
 #include "../include/movement.h"
-#include "../include/globals.h"
+#include "../include/globals.h" // Include globals.h where window is declared as extern
 #include "../include/cursor.h"
 #include <GL/freeglut.h> // Include this for text rendering
 
+// Define global variables
+GLFWwindow* window = nullptr; // Define window here
+
 float lastFrameTime = 0.0f;
-float lastTime = 0.0f; // Declare lastTime here
+float lastTime = 0.0f;
 const float TARGET_FPS = 60.0f;
 const float FRAME_DURATION = 1000.0f / TARGET_FPS; // in milliseconds
 
@@ -35,11 +38,9 @@ void setupProjection() {
     glMatrixMode(GL_MODELVIEW);
 }
 
-
 void renderText(const std::string& text, float x, float y) {
     glRasterPos2f(x, y); // Position for rendering
     for (char c : text) {
-        // Use bitmap font to render each character
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
     }
 }
@@ -55,7 +56,7 @@ int main() {
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
     // Create a fullscreen window
-    GLFWwindow* window = glfwCreateWindow(1920, 1080, "MyOpenGLGame", monitor, NULL);    
+    window = glfwCreateWindow(1920, 1080, "MyOpenGLGame", monitor, NULL);    
     if (!window) {
         std::cerr << "Error creating GLFW window\n";
         glfwTerminate();
@@ -87,14 +88,13 @@ int main() {
 
     setupProjection(); // Set up projection once during initialization
 
-
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     high_resolution_clock::time_point lastFrameTimePoint = high_resolution_clock::now();
 
-    // Inside your main loop
+    // Main loop
     while (!glfwWindowShouldClose(window)) {
         auto frameStartTime = high_resolution_clock::now();
 
@@ -118,21 +118,21 @@ glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // Draw scene
         drawFloor();
-        updateMovement(deltaTime); // This will now move based on camera direction
+        updateMovement(deltaTime); // Move based on camera direction
 
         // FPS display logic
         frameCount++;
         if (glfwGetTime() - lastTime >= 1.0) {
-            fps = frameCount; // Update fps with the frame count
-            displayFPS(fps); // Log FPS to console
+            fps = frameCount;
+            displayFPS(fps);
             frameCount = 0;
             lastTime += 1.0;
         }
 
-        // Render the FPS in the left corner
+        // Render the FPS in the corner
         std::ostringstream fpsStream;
-        fpsStream << "FPS: " << fps; // Use updated fps value
-        renderText(fpsStream.str(), -0.9f, 0.9f); // Adjust x, y as needed
+        fpsStream << "FPS: " << fps;
+        renderText(fpsStream.str(), -0.9f, 0.9f);
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);

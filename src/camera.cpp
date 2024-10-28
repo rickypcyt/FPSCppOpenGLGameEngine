@@ -1,10 +1,15 @@
 #include "../include/camera.h"
 
+// Constants
+const float PI = 3.14159265358979323846f;
+const float MIN_PITCH = -89.0f * PI / 180.0f; // In radians
+const float MAX_PITCH = 89.0f * PI / 180.0f;  // In radians
+
 void FPSCamera::updateVectors() {
     // Ensure pitch is constrained
     pitch = glm::clamp(pitch, MIN_PITCH, MAX_PITCH);
     
-    // Calculate the forward vector
+    // Calculate forward vector
     float cosPitch = std::cos(pitch);
     float sinPitch = std::sin(pitch);
     float cosYaw = std::cos(yaw);
@@ -24,32 +29,14 @@ void FPSCamera::updateVectors() {
 }
 
 FPSCamera::FPSCamera(const glm::vec3& pos, float pitchDeg, float yawDeg)
-    : position(pos)
-    , pitch(pitchDeg * PI / 180.0f)
-    , yaw(yawDeg * PI / 180.0f) {
+    : position(pos),
+      pitch(glm::radians(pitchDeg)),  // Convert degrees to radians
+      yaw(glm::radians(yawDeg)) {
     updateVectors();
 }
 
 glm::mat4 FPSCamera::getViewMatrix() const {
-    glm::mat4 viewMatrix(1.0f);
-    
-    viewMatrix[0][0] = right.x;
-    viewMatrix[1][0] = right.y;
-    viewMatrix[2][0] = right.z;
-    
-    viewMatrix[0][1] = up.x;
-    viewMatrix[1][1] = up.y;
-    viewMatrix[2][1] = up.z;
-    
-    viewMatrix[0][2] = forward.x;
-    viewMatrix[1][2] = forward.y;
-    viewMatrix[2][2] = forward.z;
-    
-    viewMatrix[3][0] = -glm::dot(right, position);
-    viewMatrix[3][1] = -glm::dot(up, position);
-    viewMatrix[3][2] = -glm::dot(forward, position);
-    
-    return viewMatrix;
+    return glm::lookAt(position, position + forward, up);
 }
 
 glm::mat4 FPSCamera::getViewMatrixQuaternion() const {
@@ -64,14 +51,14 @@ void FPSCamera::setPosition(const glm::vec3& pos) {
 }
 
 void FPSCamera::setRotation(float pitchDeg, float yawDeg) {
-    pitch = pitchDeg * PI / 180.0f;
-    yaw = yawDeg * PI / 180.0f;
+    pitch = glm::radians(pitchDeg);
+    yaw = glm::radians(yawDeg);
     updateVectors();
 }
 
 void FPSCamera::rotate(float deltaPitch, float deltaYaw) {
-    pitch += deltaPitch * PI / 180.0f;
-    yaw += deltaYaw * PI / 180.0f;
+    pitch += glm::radians(deltaPitch);
+    yaw += glm::radians(deltaYaw);
     updateVectors();
 }
 
@@ -83,24 +70,25 @@ glm::vec3 FPSCamera::getPosition() const { return position; }
 glm::vec3 FPSCamera::getForward() const { return forward; }
 glm::vec3 FPSCamera::getRight() const { return right; }
 glm::vec3 FPSCamera::getUp() const { return up; }
-float FPSCamera::getPitch() const { return pitch * 180.0f / PI; }
-float FPSCamera::getYaw() const { return yaw * 180.0f / PI; }
+float FPSCamera::getPitch() const { return glm::degrees(pitch); }
+float FPSCamera::getYaw() const { return glm::degrees(yaw); }
 
 std::array<glm::vec4, 6> FPSCamera::getFrustumPlanes(const glm::mat4& projection) const {
     glm::mat4 viewProj = projection * getViewMatrix();
+    
     std::array<glm::vec4, 6> planes;
     
-    planes[0] = glm::vec4(viewProj[3] + viewProj[0]);  // Left
-    planes[1] = glm::vec4(viewProj[3] - viewProj[0]);  // Right
-    planes[2] = glm::vec4(viewProj[3] + viewProj[1]);  // Bottom
-    planes[3] = glm::vec4(viewProj[3] - viewProj[1]);  // Top
-    planes[4] = glm::vec4(viewProj[3] + viewProj[2]);  // Near
-    planes[5] = glm::vec4(viewProj[3] - viewProj[2]);  // Far
+    planes[0] = viewProj[3] + viewProj[0];  // Left
+    planes[1] = viewProj[3] - viewProj[0];  // Right
+    planes[2] = viewProj[3] + viewProj[1];  // Bottom
+    planes[3] = viewProj[3] - viewProj[1];  // Top
+    planes[4] = viewProj[3] + viewProj[2];  // Near
+    planes[5] = viewProj[3] - viewProj[2];  // Far
     
     for (auto& plane : planes) {
         float len = glm::length(glm::vec3(plane));
         if (len > 0.0f) {
-            plane /= len;
+            plane /= len; // Normalize the plane
         }
     }
     

@@ -8,33 +8,45 @@ float lastX = WIDTH / 2.0f;
 float lastY = HEIGHT / 2.0f;
 bool firstMouse = true;
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-    static double lastX = WIDTH / 2.0;
-    static double lastY = HEIGHT / 2.0;
+// Function to update the camera direction
+void updateCameraDirection() {
+    // Calculate the new front vector
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
+}
 
-    double xoffset = xpos - lastX; // Calculate x offset
-    double yoffset = lastY - ypos; // Calculate y offset (reverse the y-axis)
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+    // Check if first mouse input to initialize lastX and lastY
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    // Calculate offsets
+    double xoffset = xpos - lastX;
+    double yoffset = lastY - ypos; // Inverted y-axis for proper movement
     lastX = xpos;
     lastY = ypos;
 
-    const float mouseScaleFactor = 0.1f; // Adjust this factor for finer control
+    // Sensitivity and smoothing adjustment
+    const float sensitivity = 0.1f; // Adjust sensitivity as needed
+    const float smoothingFactor = 0.1f; // Adjust smoothing factor as needed
 
-yaw += xoffset * sensitivity * mouseScaleFactor;
-pitch += yoffset * sensitivity * mouseScaleFactor;
+    // Apply smoothing
+    xoffset = (xoffset * smoothingFactor) + (lastX - xpos) * (1.0f - smoothingFactor);
+    yoffset = (yoffset * smoothingFactor) + (lastY - ypos) * (1.0f - smoothingFactor);
 
+    // Update yaw and pitch
+    yaw += xoffset * sensitivity;
+    pitch += yoffset * sensitivity;
 
-    // Constrain pitch to avoid flipping the camera
-    if (pitch > 89.0f) {
-        pitch = 89.0f;
-    }
-    if (pitch < -89.0f) {
-        pitch = -89.0f;
-    }
+    // Clamp pitch to prevent inverted view
+    pitch = glm::clamp(pitch, -89.0f, 89.0f);
 
-    // Update the camera direction based on yaw and pitch
-    glm::vec3 direction;
-    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    direction.y = sin(glm::radians(pitch));
-    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraFront = glm::normalize(direction);
+    // Update camera direction based on new yaw and pitch
+    updateCameraDirection();
 }
