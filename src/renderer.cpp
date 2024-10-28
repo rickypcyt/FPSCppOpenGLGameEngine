@@ -2,30 +2,26 @@
 #include "../include/renderer.h"
 
 void drawFloor() {
-    float size = 20.0f; // New size for the floor
+    float size = 20.0f; // Size for the floor
+    float tileSize = 2.0f; // Size of each tile for the checkerboard pattern
 
-    // Draw the floor
-    glColor3f(0.5f, 0.5f, 0.5f); // Gray color for the floor
-    glBegin(GL_QUADS);
-        glVertex3f(-size, 0.0f, -size);
-        glVertex3f(size, 0.0f, -size);
-        glVertex3f(size, 0.0f, size);
-        glVertex3f(-size, 0.0f, size);
-    glEnd();
-
-    // Draw grid lines on the floor
-    glColor3f(1.0f, 1.0f, 1.0f); // White color for grid lines
-    glBegin(GL_LINES);
-    for (float i = -size; i <= size; i += 1.0f) {
-        // Vertical lines
-        glVertex3f(i, 0.0f, -size);
-        glVertex3f(i, 0.0f, size);
-        
-        // Horizontal lines
-        glVertex3f(-size, 0.0f, i);
-        glVertex3f(size, 0.0f, i);
+    // Draw the checkerboard floor
+    for (float x = -size; x < size; x += tileSize) {
+        for (float z = -size; z < size; z += tileSize) {
+            // Alternate colors based on position
+            if (((int)(x / tileSize) + (int)(z / tileSize)) % 2 == 0) {
+                glColor3f(0.8f, 0.8f, 0.8f); // Light gray
+            } else {
+                glColor3f(0.6f, 0.6f, 0.6f); // Dark gray
+            }
+            glBegin(GL_QUADS);
+                glVertex3f(x, 0.0f, z);
+                glVertex3f(x + tileSize, 0.0f, z);
+                glVertex3f(x + tileSize, 0.0f, z + tileSize);
+                glVertex3f(x, 0.0f, z + tileSize);
+            glEnd();
+        }
     }
-    glEnd();
 
     // Draw a wall for reference
     glColor3f(0.7f, 0.3f, 0.3f); // Reddish color for the wall
