@@ -167,7 +167,24 @@ CMakeFiles/My3DGame.dir/camera.cpp.o: \
  /usr/include/glm/packing.hpp /usr/include/glm/detail/func_packing.inl \
  /usr/include/glm/detail/type_half.hpp \
  /usr/include/glm/detail/type_half.inl /usr/include/glm/integer.hpp \
- /usr/include/glm/detail/func_integer.inl \
+ /usr/include/glm/detail/func_integer.inl /usr/include/c++/14.2.1/array \
+ /usr/include/c++/14.2.1/compare /usr/include/c++/14.2.1/initializer_list \
+ /usr/include/c++/14.2.1/bits/functexcept.h \
+ /usr/include/c++/14.2.1/bits/exception_defines.h \
+ /usr/include/c++/14.2.1/bits/stl_algobase.h \
+ /usr/include/c++/14.2.1/ext/numeric_traits.h \
+ /usr/include/c++/14.2.1/bits/stl_pair.h \
+ /usr/include/c++/14.2.1/bits/move.h \
+ /usr/include/c++/14.2.1/bits/utility.h \
+ /usr/include/c++/14.2.1/bits/stl_iterator_base_types.h \
+ /usr/include/c++/14.2.1/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/14.2.1/bits/concept_check.h \
+ /usr/include/c++/14.2.1/debug/assertions.h \
+ /usr/include/c++/14.2.1/bits/stl_iterator.h \
+ /usr/include/c++/14.2.1/bits/ptr_traits.h \
+ /usr/include/c++/14.2.1/debug/debug.h \
+ /usr/include/c++/14.2.1/bits/predefined_ops.h \
+ /usr/include/c++/14.2.1/bits/range_access.h \
  /usr/include/glm/gtc/matrix_transform.hpp \
  /usr/include/glm/ext/matrix_projection.hpp \
  /usr/include/glm/gtc/constants.hpp \
@@ -213,30 +230,4 @@ CMakeFiles/My3DGame.dir/camera.cpp.o: \
  /usr/include/glm/ext/vector_uint1.hpp \
  /usr/include/glm/ext/vector_uint1_sized.hpp \
  /usr/include/c++/14.2.1/cstring /usr/include/string.h \
- /usr/include/strings.h /usr/include/glm/gtc/type_ptr.inl \
- /usr/include/glm/gtx/quaternion.hpp \
- /usr/include/glm/ext/quaternion_exponential.hpp \
- /usr/include/glm/ext/quaternion_exponential.inl \
- /usr/include/glm/gtx/norm.hpp /usr/include/glm/gtx/component_wise.hpp \
- /usr/include/glm/detail/setup.hpp \
- /usr/include/glm/gtx/component_wise.inl \
- /usr/include/glm/ext/scalar_common.hpp \
- /usr/include/glm/ext/scalar_common.inl /usr/include/glm/gtx/norm.inl \
- /usr/include/glm/gtx/quaternion.inl /usr/include/c++/14.2.1/array \
- /usr/include/c++/14.2.1/compare /usr/include/c++/14.2.1/initializer_list \
- /usr/include/c++/14.2.1/bits/functexcept.h \
- /usr/include/c++/14.2.1/bits/exception_defines.h \
- /usr/include/c++/14.2.1/bits/stl_algobase.h \
- /usr/include/c++/14.2.1/ext/numeric_traits.h \
- /usr/include/c++/14.2.1/bits/stl_pair.h \
- /usr/include/c++/14.2.1/bits/move.h \
- /usr/include/c++/14.2.1/bits/utility.h \
- /usr/include/c++/14.2.1/bits/stl_iterator_base_types.h \
- /usr/include/c++/14.2.1/bits/stl_iterator_base_funcs.h \
- /usr/include/c++/14.2.1/bits/concept_check.h \
- /usr/include/c++/14.2.1/debug/assertions.h \
- /usr/include/c++/14.2.1/bits/stl_iterator.h \
- /usr/include/c++/14.2.1/bits/ptr_traits.h \
- /usr/include/c++/14.2.1/debug/debug.h \
- /usr/include/c++/14.2.1/bits/predefined_ops.h \
- /usr/include/c++/14.2.1/bits/range_access.h
+ /usr/include/strings.h /usr/include/glm/gtc/type_ptr.inl

@@ -9,12 +9,11 @@
 
 #include "../include/renderer.h"
 #include "../include/movement.h"
-#include "../include/globals.h" // Include globals.h where window is declared as extern
+#include "../include/globals.h"
 #include "../include/cursor.h"
-#include <GL/freeglut.h> // Include this for text rendering
+#include <GL/freeglut.h>
 
-// Define global variables
-GLFWwindow* window = nullptr; // Define window here
+GLFWwindow* window = nullptr;
 
 float lastFrameTime = 0.0f;
 float lastTime = 0.0f;
@@ -34,12 +33,12 @@ float fps = 0.0f;
 void setupProjection() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, (float)1920 / (float)1080, 0.1f, 100.0f); // Aspect ratio set to 1920:1080
+    gluPerspective(90.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f); // Increased FOV to 90
     glMatrixMode(GL_MODELVIEW);
 }
 
 void renderText(const std::string& text, float x, float y) {
-    glRasterPos2f(x, y); // Position for rendering
+    glRasterPos2f(x, y);
     for (char c : text) {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, c);
     }
@@ -51,11 +50,8 @@ int main() {
         return -1;
     }
 
-    // Get the primary monitor
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-
-    // Create a fullscreen window
     window = glfwCreateWindow(1920, 1080, "MyOpenGLGame", monitor, NULL);    
     if (!window) {
         std::cerr << "Error creating GLFW window\n";
@@ -63,9 +59,7 @@ int main() {
         return -1;
     }
 
-    // Set the viewport
-    glViewport(0, 0, 1920, 1080); // Adjust the viewport to match the window size
-
+    glViewport(0, 0, 1920, 1080);
     glfwMakeContextCurrent(window);
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_DEPTH_TEST);
@@ -75,52 +69,38 @@ int main() {
         return -1;
     }
 
-    // Initialize FreeGLUT
     int argc = 0;
     char** argv = nullptr;
     glutInit(&argc, argv); // Initialize FreeGLUT
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
-    
-    // Lock the cursor
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    setupProjection(); // Set up projection once during initialization
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    setupProjection();
 
     high_resolution_clock::time_point lastFrameTimePoint = high_resolution_clock::now();
 
-    // Main loop
     while (!glfwWindowShouldClose(window)) {
         auto frameStartTime = high_resolution_clock::now();
 
-        // Frame timing logic
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrameTime;
         lastFrameTime = currentFrame;
 
-        // Clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
 
-        // Camera setup
+        // Set up camera position and direction
         glm::vec3 cameraPosition = glm::vec3(characterPosX, characterPosY + 1.5f, characterPosZ);
         glm::vec3 cameraTarget = cameraPosition + cameraFront;
-        gluLookAt(
-            cameraPosition.x, cameraPosition.y, cameraPosition.z,
-            cameraTarget.x, cameraTarget.y, cameraTarget.z,
-            0.0f, 1.0f, 0.0f
-        );
+        gluLookAt(cameraPosition.x, cameraPosition.y, cameraPosition.z,
+                  cameraTarget.x, cameraTarget.y, cameraTarget.z,
+                  0.0f, 1.0f, 0.0f);
 
-        // Draw scene
         drawFloor();
-        updateMovement(deltaTime); // Move based on camera direction
+        updateMovement(deltaTime); // Handle movement
 
-        // FPS display logic
         frameCount++;
         if (glfwGetTime() - lastTime >= 1.0) {
             fps = frameCount;
@@ -129,12 +109,10 @@ int main() {
             lastTime += 1.0;
         }
 
-        // Render the FPS in the corner
         std::ostringstream fpsStream;
         fpsStream << "FPS: " << fps;
         renderText(fpsStream.str(), -0.9f, 0.9f);
 
-        // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
 
@@ -147,7 +125,6 @@ int main() {
         }
     }
 
-    // Clean up
     glfwTerminate();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     return 0;

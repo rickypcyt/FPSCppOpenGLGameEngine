@@ -1,29 +1,24 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <cmath>
-#include <iostream>
 #include "../include/movement.h"
 #include "../include/globals.h"
 
 // Movement constants
 struct MovementConstants {
     static constexpr float JUMP_HEIGHT = 5.0f;
-    static constexpr float GRAVITY = 15.0f;         // Increased gravity for better feel
+    static constexpr float GRAVITY = 20.0f;         // Adjusted gravity for better feel
     static constexpr float GROUND_LEVEL = 0.0f;
-    static constexpr float AIR_CONTROL = 0.7f;
-    static constexpr float ACCELERATION = 20.0f;
-    static constexpr float DECELERATION = 25.0f;
-    static constexpr float INITIAL_JUMP_VELOCITY = 7.0f; // Initial upward velocity
+    static constexpr float AIR_CONTROL = 0.5f;       // Reduced air control for more realistic jumps
+    static constexpr float ACCELERATION = 0.0f;      // Instantaneous acceleration
+    static constexpr float DECELERATION = 0.0f;      // Instantaneous deceleration
+    static constexpr float INITIAL_JUMP_VELOCITY = 8.0f; // Adjusted for more height
 };
 
 // Movement state
 struct MovementState {
     bool isJumping = false;
-    bool wasGrounded = true;
     float verticalVelocity = 0.0f;
-    float currentSpeed = 0.0f;
-    glm::vec3 velocity = glm::vec3(0.0f);
     
     // Input state
     bool moveForward = false;
@@ -34,15 +29,6 @@ struct MovementState {
 
 static MovementState moveState;
 
-float lerp(float start, float end, float t) {
-    return start + t * (end - start);
-}
-
-float applyMovementSmoothing(float currentSpeed, float targetSpeed, float deltaTime) {
-    float acceleration = (targetSpeed != 0.0f) ? MovementConstants::ACCELERATION : MovementConstants::DECELERATION;
-    return lerp(currentSpeed, targetSpeed, 1.0f - std::exp(-acceleration * deltaTime));
-}
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS) {
         switch (key) {
@@ -51,27 +37,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             case GLFW_KEY_A: moveState.moveLeft = true; break;
             case GLFW_KEY_D: moveState.moveRight = true; break;
             case GLFW_KEY_SPACE: 
-                // Only trigger jump if we're on the ground
+                // Only jump if we're grounded
                 if (characterPosY <= MovementConstants::GROUND_LEVEL) {
                     moveState.isJumping = true;
                     moveState.verticalVelocity = MovementConstants::INITIAL_JUMP_VELOCITY;
-                    std::cout << "Jump initiated! Velocity: " << moveState.verticalVelocity << std::endl;
                 }
                 break;
             case GLFW_KEY_ESCAPE:
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
-                break;
-            case GLFW_KEY_EQUAL:
-                if (mods & GLFW_MOD_CONTROL) {
-                    sensitivity += 0.01f;
-                    std::cout << "Mouse sensitivity increased to: " << sensitivity << std::endl;
-                }
-                break;
-            case GLFW_KEY_MINUS:
-                if (mods & GLFW_MOD_CONTROL) {
-                    sensitivity = std::max(0.01f, sensitivity - 0.01f);
-                    std::cout << "Mouse sensitivity decreased to: " << sensitivity << std::endl;
-                }
                 break;
         }
     } else if (action == GLFW_RELEASE) {
@@ -85,22 +58,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 }
 
 void updateJump(float deltaTime) {
-    // Apply gravity when in air
-    if (characterPosY > MovementConstants::GROUND_LEVEL || moveState.verticalVelocity > 0) {
+    if (moveState.isJumping) {
         moveState.verticalVelocity -= MovementConstants::GRAVITY * deltaTime;
         characterPosY += moveState.verticalVelocity * deltaTime;
-        
-        // Debug output for jump physics
-        if (moveState.isJumping) {
-            std::cout << "Jump Height: " << characterPosY << " Velocity: " << moveState.verticalVelocity << std::endl;
-        }
-    }
 
-    // Ground collision check
-    if (characterPosY <= MovementConstants::GROUND_LEVEL) {
-        characterPosY = MovementConstants::GROUND_LEVEL;
-        moveState.verticalVelocity = 0.0f;
-        moveState.isJumping = false;
+        // Land if below ground level
+        if (characterPosY <= MovementConstants::GROUND_LEVEL) {
+            characterPosY = MovementConstants::GROUND_LEVEL;
+            moveState.verticalVelocity = 0.0f;
+            moveState.isJumping = false;
+        }
     }
 }
 
@@ -116,29 +83,17 @@ void updateMovement(float deltaTime) {
     if (moveState.moveRight) moveDirection += right;
     if (moveState.moveLeft) moveDirection -= right;
 
-    // Normalize direction and calculate movement
+    // Normalize direction and remove vertical component
     if (glm::length(moveDirection) > 0.0f) {
         moveDirection = glm::normalize(moveDirection);
-        
-        // Remove vertical component from movement
-        moveDirection.y = 0.0f;
-        moveDirection = glm::normalize(moveDirection);
+        moveDirection.y = 0.0f; // Prevent vertical movement
     }
 
-    // Apply movement speed and air control
-    float targetSpeed = glm::length(moveDirection) * moveSpeed;
-    if (characterPosY > MovementConstants::GROUND_LEVEL) {
-        targetSpeed *= MovementConstants::AIR_CONTROL;
-    }
+    // Apply movement
+    float speed = moveSpeed; // Adjust as needed
+    characterPosX += moveDirection.x * speed * deltaTime;
+    characterPosZ += moveDirection.z * speed * deltaTime;
 
-    // Update horizontal movement
-    moveState.currentSpeed = applyMovementSmoothing(moveState.currentSpeed, targetSpeed, deltaTime);
-    glm::vec3 finalVelocity = moveDirection * moveState.currentSpeed;
-    
-    // Update position
-    characterPosX += finalVelocity.x * deltaTime;
-    characterPosZ += finalVelocity.z * deltaTime;
-
-    // Handle jumping and vertical movement
+    // Update jumping logic
     updateJump(deltaTime);
 }

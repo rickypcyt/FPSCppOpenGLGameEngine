@@ -32,8 +32,9 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
-    // Sensitivity and smoothing adjustment
-    const float sensitivity = 0.1f; // Adjust sensitivity as needed
+    // Adjust sensitivity
+    const float sensitivity = 0.1f; // Decrease sensitivity if needed
+    //const float sensitivity = 0.02f; // Try a lower sensitivity
     const float smoothingFactor = 0.1f; // Adjust smoothing factor as needed
 
     // Apply smoothing
@@ -41,7 +42,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     yoffset = (yoffset * smoothingFactor) + (lastY - ypos) * (1.0f - smoothingFactor);
 
     // Update yaw and pitch
-    yaw += xoffset * sensitivity;
+    yaw += xoffset * sensitivity; // Adjust sensitivity here
     pitch += yoffset * sensitivity;
 
     // Clamp pitch to prevent inverted view
