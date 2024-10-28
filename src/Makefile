@@ -177,6 +177,30 @@ cursor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/cursor.cpp.s
 .PHONY : cursor.cpp.s
 
+glad.o: glad.c.o
+.PHONY : glad.o
+
+# target to build an object file
+glad.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/glad.c.o
+.PHONY : glad.c.o
+
+glad.i: glad.c.i
+.PHONY : glad.i
+
+# target to preprocess a source file
+glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/glad.c.i
+.PHONY : glad.c.i
+
+glad.s: glad.c.s
+.PHONY : glad.s
+
+# target to generate assembly for a file
+glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/My3DGame.dir/build.make CMakeFiles/My3DGame.dir/glad.c.s
+.PHONY : glad.c.s
+
 globals.o: globals.cpp.o
 .PHONY : globals.o
 
@@ -288,6 +312,9 @@ help:
 	@echo "... cursor.o"
 	@echo "... cursor.i"
 	@echo "... cursor.s"
+	@echo "... glad.o"
+	@echo "... glad.i"
+	@echo "... glad.s"
 	@echo "... globals.o"
 	@echo "... globals.i"
 	@echo "... globals.s"

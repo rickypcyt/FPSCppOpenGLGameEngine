@@ -6,6 +6,7 @@
 #include <thread>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
 #include "../include/renderer.h"
 #include "../include/movement.h"
 #include "../include/globals.h"
@@ -85,6 +86,11 @@ int main() {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     setupProjection(); // Set up projection once during initialization
+
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     high_resolution_clock::time_point lastFrameTimePoint = high_resolution_clock::now();
 

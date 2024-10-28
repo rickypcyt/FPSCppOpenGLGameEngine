@@ -283,9 +283,10 @@ CMakeFiles/My3DGame.dir/main.cpp.o: \
  /usr/include/glm/ext/matrix_transform.inl \
  /usr/include/glm/gtc/matrix_transform.inl \
  /home/ricky/coding/GccGame-main/src/../include/renderer.h \
+ /home/ricky/coding/GccGame-main/src/../include/stb_image.h \
+ /usr/include/c++/14.2.1/stdlib.h \
  /home/ricky/coding/GccGame-main/src/../include/movement.h \
  /home/ricky/coding/GccGame-main/src/../include/globals.h \
  /home/ricky/coding/GccGame-main/src/../include/cursor.h \
  /usr/include/GL/freeglut.h /usr/include/GL/freeglut_std.h \
- /usr/include/c++/14.2.1/stdlib.h /usr/include/GL/freeglut_ext.h \
- /usr/include/GL/freeglut_ucall.h
+ /usr/include/GL/freeglut_ext.h /usr/include/GL/freeglut_ucall.h

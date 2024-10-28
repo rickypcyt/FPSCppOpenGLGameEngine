@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/My3DGame.dir/camera.cpp.o.d"
   "CMakeFiles/My3DGame.dir/cursor.cpp.o"
   "CMakeFiles/My3DGame.dir/cursor.cpp.o.d"
+  "CMakeFiles/My3DGame.dir/glad.c.o"
+  "CMakeFiles/My3DGame.dir/glad.c.o.d"
   "CMakeFiles/My3DGame.dir/globals.cpp.o"
   "CMakeFiles/My3DGame.dir/globals.cpp.o.d"
   "CMakeFiles/My3DGame.dir/main.cpp.o"
@@ -16,6 +18,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang C CXX)
   include(CMakeFiles/My3DGame.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()
