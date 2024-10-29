@@ -391,6 +391,7 @@ CMakeFiles/My3DGame.dir/cursor.cpp.o: cursor.cpp \
   /usr/include/glm/detail/func_vector_relational.inl \
   /usr/include/glm/detail/qualifier.hpp \
   /usr/include/glm/detail/setup.hpp \
+  /usr/include/glm/detail/type_float.hpp \
   /usr/include/glm/detail/type_half.hpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/detail/type_mat2x2.hpp \
@@ -411,6 +412,8 @@ CMakeFiles/My3DGame.dir/cursor.cpp.o: cursor.cpp \
   /usr/include/glm/detail/type_mat4x3.inl \
   /usr/include/glm/detail/type_mat4x4.hpp \
   /usr/include/glm/detail/type_mat4x4.inl \
+  /usr/include/glm/detail/type_quat.hpp \
+  /usr/include/glm/detail/type_quat.inl \
   /usr/include/glm/detail/type_vec1.hpp \
   /usr/include/glm/detail/type_vec1.inl \
   /usr/include/glm/detail/type_vec2.hpp \
@@ -462,6 +465,24 @@ CMakeFiles/My3DGame.dir/cursor.cpp.o: cursor.cpp \
   /usr/include/glm/ext/matrix_projection.inl \
   /usr/include/glm/ext/matrix_transform.hpp \
   /usr/include/glm/ext/matrix_transform.inl \
+  /usr/include/glm/ext/quaternion_common.hpp \
+  /usr/include/glm/ext/quaternion_common.inl \
+  /usr/include/glm/ext/quaternion_double.hpp \
+  /usr/include/glm/ext/quaternion_double_precision.hpp \
+  /usr/include/glm/ext/quaternion_exponential.hpp \
+  /usr/include/glm/ext/quaternion_exponential.inl \
+  /usr/include/glm/ext/quaternion_float.hpp \
+  /usr/include/glm/ext/quaternion_float_precision.hpp \
+  /usr/include/glm/ext/quaternion_geometric.hpp \
+  /usr/include/glm/ext/quaternion_geometric.inl \
+  /usr/include/glm/ext/quaternion_relational.hpp \
+  /usr/include/glm/ext/quaternion_relational.inl \
+  /usr/include/glm/ext/quaternion_transform.hpp \
+  /usr/include/glm/ext/quaternion_transform.inl \
+  /usr/include/glm/ext/quaternion_trigonometric.hpp \
+  /usr/include/glm/ext/quaternion_trigonometric.inl \
+  /usr/include/glm/ext/scalar_common.hpp \
+  /usr/include/glm/ext/scalar_common.inl \
   /usr/include/glm/ext/scalar_constants.hpp \
   /usr/include/glm/ext/scalar_constants.inl \
   /usr/include/glm/ext/scalar_int_sized.hpp \
@@ -490,6 +511,8 @@ CMakeFiles/My3DGame.dir/cursor.cpp.o: cursor.cpp \
   /usr/include/glm/ext/vector_int3_sized.hpp \
   /usr/include/glm/ext/vector_int4.hpp \
   /usr/include/glm/ext/vector_int4_sized.hpp \
+  /usr/include/glm/ext/vector_relational.hpp \
+  /usr/include/glm/ext/vector_relational.inl \
   /usr/include/glm/ext/vector_uint2.hpp \
   /usr/include/glm/ext/vector_uint2_sized.hpp \
   /usr/include/glm/ext/vector_uint3.hpp \
@@ -501,8 +524,18 @@ CMakeFiles/My3DGame.dir/cursor.cpp.o: cursor.cpp \
   /usr/include/glm/glm.hpp \
   /usr/include/glm/gtc/constants.hpp \
   /usr/include/glm/gtc/constants.inl \
+  /usr/include/glm/gtc/epsilon.hpp \
+  /usr/include/glm/gtc/epsilon.inl \
   /usr/include/glm/gtc/matrix_transform.hpp \
   /usr/include/glm/gtc/matrix_transform.inl \
+  /usr/include/glm/gtc/quaternion.hpp \
+  /usr/include/glm/gtc/quaternion.inl \
+  /usr/include/glm/gtx/component_wise.hpp \
+  /usr/include/glm/gtx/component_wise.inl \
+  /usr/include/glm/gtx/norm.hpp \
+  /usr/include/glm/gtx/norm.inl \
+  /usr/include/glm/gtx/quaternion.hpp \
+  /usr/include/glm/gtx/quaternion.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/mat2x2.hpp \
   /usr/include/glm/mat2x3.hpp \
@@ -1674,6 +1707,16 @@ globals.cpp:
 
 /usr/include/bits/dlfcn.h:
 
+/usr/include/glm/gtx/quaternion.inl:
+
+/usr/include/glm/gtx/norm.inl:
+
+/usr/include/glm/gtx/norm.hpp:
+
+/usr/include/glm/ext/scalar_common.hpp:
+
+/usr/include/glm/ext/quaternion_exponential.hpp:
+
 /usr/include/GL/gl.h:
 
 /home/ricky/coding/GccGame-main/include/cursor.h:
@@ -1727,6 +1770,8 @@ glad.c:
 /usr/include/glm/mat2x3.hpp:
 
 /usr/include/glm/mat2x2.hpp:
+
+/usr/include/glm/gtx/component_wise.hpp:
 
 /usr/include/glm/integer.hpp:
 
@@ -1830,6 +1875,8 @@ main.cpp:
 
 /usr/include/GL/freeglut_ucall.h:
 
+/usr/include/glm/ext/quaternion_exponential.inl:
+
 /usr/include/c++/14.2.1/bits/stl_iterator_base_funcs.h:
 
 /usr/include/bits/wctype-wchar.h:
@@ -1899,6 +1946,8 @@ cursor.cpp:
 /usr/include/bits/types/timer_t.h:
 
 /usr/include/bits/long-double.h:
+
+/usr/include/glm/gtx/quaternion.hpp:
 
 /usr/include/bits/fp-logb.h:
 
@@ -2136,6 +2185,8 @@ camera.cpp:
 
 /usr/include/bits/types/struct___jmp_buf_tag.h:
 
+/usr/include/glm/gtx/component_wise.inl:
+
 /usr/include/bits/waitstatus.h:
 
 /usr/include/glm/detail/type_mat3x4.inl:
@@ -2283,6 +2334,8 @@ renderer.cpp:
 /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h:
 
 /usr/include/glm/ext/matrix_transform.hpp:
+
+/usr/include/glm/ext/scalar_common.inl:
 
 /usr/include/glm/ext/matrix_float3x3.hpp:
 
