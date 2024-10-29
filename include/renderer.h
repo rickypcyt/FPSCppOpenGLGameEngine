@@ -3,11 +3,14 @@
 
 #include <GL/gl.h>
 #include "stb_image.h"
+// Function to load a texture
+GLuint loadTexture(const char* filepath);
+
+extern GLuint textureID; // Add this line
 
 // Function to draw the floor
 void drawFloor();
 
-// Function to load a texture
-GLuint loadTexture(const char* filepath);
+
 
 #endif // RENDERER_H

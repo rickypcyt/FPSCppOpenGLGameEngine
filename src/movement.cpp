@@ -74,25 +74,26 @@ void updateJump(float deltaTime) {
 void updateMovement(float deltaTime) {
     // Calculate movement direction
     glm::vec3 moveDirection(0.0f);
-    
+
+    // Forward/backward movement
     if (moveState.moveForward) moveDirection += cameraFront;
     if (moveState.moveBackward) moveDirection -= cameraFront;
-    
+
     // Calculate right vector for strafing
     glm::vec3 right = glm::normalize(glm::cross(cameraFront, glm::vec3(0.0f, 1.0f, 0.0f)));
     if (moveState.moveRight) moveDirection += right;
     if (moveState.moveLeft) moveDirection -= right;
 
-    // Normalize direction and remove vertical component
+    // Normalize the movement direction
     if (glm::length(moveDirection) > 0.0f) {
         moveDirection = glm::normalize(moveDirection);
         moveDirection.y = 0.0f; // Prevent vertical movement
     }
 
-    // Apply movement
-    float speed = moveSpeed; // Adjust as needed
-    characterPosX += moveDirection.x * speed * deltaTime;
-    characterPosZ += moveDirection.z * speed * deltaTime;
+    // Apply movement with speed and deltaTime
+    float speed = moveSpeed * deltaTime; // Make speed frame-rate independent
+    characterPosX += moveDirection.x * speed;
+    characterPosZ += moveDirection.z * speed;
 
     // Update jumping logic
     updateJump(deltaTime);
